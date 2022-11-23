@@ -64,6 +64,7 @@ if __name__ == "__main__":
     pathlist = pathlib.Path(bench_dir).rglob('*.json')
     benchnames = [os.path.basename(path)[:-5] for path in pathlist]
     benchnames.sort()
+    benchnames.remove('azimint_naive')
     failed = []
     for benchname in benchnames:
         p = Process(target=run_benchmark,
