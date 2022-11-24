@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
+**/npbench.db
+**/heatmap.pdf
 **/.dacecache/
 **/.DS_Store
 __pycache__/
