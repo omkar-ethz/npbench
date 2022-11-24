@@ -1,4 +1,5 @@
 import argparse
+import os
 
 from npbench.infrastructure import (Benchmark, generate_framework, LineCount,
                                     Test, utilities as util)
@@ -44,6 +45,11 @@ if __name__ == "__main__":
                         default=False)
     args = vars(parser.parse_args())
 
+    # set environment variable openmp_tasking
+    if args["framework"] == "dace_cpu_tasking":
+        os.environ['DACE_compiler_cpu_openmp_tasking'] = "true"
+    elif args["framework"] == "dace_cpu":
+        os.environ['DACE_compiler_cpu_openmp_tasking'] = "false"
     # print(args)
 
     bench = Benchmark(args["benchmark"])

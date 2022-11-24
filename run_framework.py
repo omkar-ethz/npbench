@@ -59,6 +59,13 @@ if __name__ == "__main__":
                         default=False)
     args = vars(parser.parse_args())
 
+    # set environment variable openmp_tasking
+    if args["framework"] == "dace_cpu_tasking":
+        os.environ['DACE_compiler_cpu_openmp_tasking'] = "true"
+    elif args["framework"] == "dace_cpu":
+        os.environ['DACE_compiler_cpu_openmp_tasking'] = "false"
+
+
     parent_folder = pathlib.Path(__file__).parent.absolute()
     bench_dir = parent_folder.joinpath("bench_info")
     pathlist = pathlib.Path(bench_dir).rglob('*.json')
