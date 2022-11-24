@@ -64,7 +64,9 @@ if __name__ == "__main__":
         os.environ['DACE_compiler_cpu_openmp_tasking'] = "true"
     elif args["framework"] == "dace_cpu":
         os.environ['DACE_compiler_cpu_openmp_tasking'] = "false"
-
+    elif args["framework"] == "dace_cpu_dynamic_schedule":
+        os.environ['DACE_compiler_cpu_openmp_tasking'] = "false"
+        os.environ['DACE_compiler_cpu_openmp_dynamic_schedule'] = "true"
 
     parent_folder = pathlib.Path(__file__).parent.absolute()
     bench_dir = parent_folder.joinpath("bench_info")

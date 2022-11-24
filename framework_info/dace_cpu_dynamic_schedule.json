@@ -1,0 +1,10 @@
+{
+    "framework": {
+        "simple_name": "dace_cpu_dynamic_schedule",
+        "full_name": "DaCe CPU Dynamic schedule",
+        "prefix": "dc",
+        "postfix": "dace",
+        "class": "DaceFramework",
+        "arch": "cpu"
+    }
+}
