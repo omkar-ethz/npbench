@@ -82,6 +82,11 @@ if __name__ == "__main__":
                         choices=['S', 'M', 'L', 'paper'],
                         nargs="?",
                         default='S')
+    parser.add_argument("-n",
+                        "--num-threads",
+                        type=int,
+                        nargs="?",
+                        default=1)
     args = vars(parser.parse_args())
 
 # create a database connection
@@ -103,6 +108,10 @@ data = data.drop(['validated'], axis=1).reset_index(drop=True)
 # Filter by preset
 data = data[data['preset'] == args['preset']]
 data = data.drop(['preset'], axis=1).reset_index(drop=True)
+
+#Filter by num_threads
+data = data[data['num_threads'] == args['num_threads']]
+data = data.drop(['num_threads'], axis=1).reset_index(drop=True)
 
 # for each framework and benchmark, choose only the best details,mode (based on median runtime), then get rid of those
 aggdata = data.groupby(["benchmark", "domain", "framework", "mode", "details"],

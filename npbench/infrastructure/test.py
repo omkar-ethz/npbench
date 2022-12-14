@@ -47,7 +47,7 @@ class Test(object):
             out += [ldict[a] for a in self.frmwrk.args(self.bench)]
         return out, timelist
 
-    def run(self, preset: str, validate: bool, repeat: int, timeout: float = 200.0, ignore_errors: bool = True):
+    def run(self, preset: str, validate: bool, repeat: int, timeout: float = 200.0, ignore_errors: bool = True, num_threads: int = 1):
         """ Tests the framework against the benchmark.
         :param preset: The preset to use for testing (S, M, L, paper).
         :param validate: If true, it validates the output against NumPy.
@@ -147,6 +147,7 @@ class Test(object):
                 'version': version,
                 'details': d["details"],
                 'validated': d["validated"],
+                'num_threads': num_threads,
                 'time': d["time"]
             }
             result = tuple(new_d.values())

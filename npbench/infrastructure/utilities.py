@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS results (
     version text NOT NULL,
     details text,
     validated integer,
+    num_threads integer,
     time real
 );
 """
@@ -93,8 +94,8 @@ CREATE TABLE IF NOT EXISTS results (
 sql_insert_into_results_table = """
 INSERT INTO results(
     timestamp, benchmark, kind, domain, dwarf, preset, mode,
-    framework, version, details, validated, time
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    framework, version, details, validated, num_threads, time
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 """
 
 sql_create_lcounts_table = """

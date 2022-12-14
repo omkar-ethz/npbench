@@ -43,13 +43,24 @@ if __name__ == "__main__":
                         type=util.str2bool,
                         nargs="?",
                         default=False)
+    parser.add_argument("-n",
+                        "--num-threads",
+                        type=int,
+                        nargs="?",
+                        default=1)
     args = vars(parser.parse_args())
 
+    os.environ['OMP_NUM_THREADS'] = str(args["num_threads"])
+    print("num_threads=", str(args["num_threads"]))
     # set environment variable openmp_tasking
     if args["framework"] == "dace_cpu_tasking":
         os.environ['DACE_compiler_cpu_openmp_tasking'] = "true"
     elif args["framework"] == "dace_cpu":
         os.environ['DACE_compiler_cpu_openmp_tasking'] = "false"
+    elif args["framework"] == "dace_cpu_dynamic_schedule":
+        os.environ['DACE_compiler_cpu_openmp_tasking'] = "false"
+        os.environ['DACE_compiler_cpu_openmp_dynamic_schedule'] = "true"
+
     # print(args)
 
     bench = Benchmark(args["benchmark"])
@@ -60,4 +71,4 @@ if __name__ == "__main__":
     lcount = LineCount(bench, frmwrk, numpy)
     lcount.count()
     test = Test(bench, frmwrk, numpy)
-    test.run(args["preset"], args["validate"], args["repeat"], args["timeout"])
+    test.run(args["preset"], args["validate"], args["repeat"], args["timeout"], num_threads=args["num_threads"])
